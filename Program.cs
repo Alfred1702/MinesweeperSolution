@@ -11,7 +11,10 @@ namespace MinesweeperApp
             while (true)
             {
                 int size = GetPositiveNumber("Enter the size of the grid (e.g. 4 for a 4x4 grid): ");
+                
+                //As mention the max mines input will be 35% of the size of the grid this is the calculation
                 int maxMines = (size * size * 35) / 100;
+
                 int mines = GetMinesInRange($"Enter the number of mines (maximum is 35% of the total squares) (e.g. 0-{maxMines}): ", 0, maxMines);
 
                 var game = new MinesweeperGame(size, mines);
@@ -25,6 +28,7 @@ namespace MinesweeperApp
                     var input = Console.ReadLine();
                     if (ParseInput(input, size, out int row, out int col))
                     {
+                        //This is to check if the user select the same cell to releaved
                         if (game.Grid[row, col].IsRevealed)
                         {
                             Console.WriteLine("This square has already been revealed. Please choose another one.");
@@ -63,6 +67,7 @@ namespace MinesweeperApp
             }
         }
 
+        //This will check the input number whether is it greater than 0 if not it will prompt invalid inputs
         static int GetPositiveNumber(string prompt)
         {
             while (true)
@@ -79,6 +84,7 @@ namespace MinesweeperApp
             }
         }
 
+        //This function is to check the value of the input mines is not greater or lesser than the value.
         static int GetMinesInRange(string prompt, int min, int max)
         {
             while (true)
